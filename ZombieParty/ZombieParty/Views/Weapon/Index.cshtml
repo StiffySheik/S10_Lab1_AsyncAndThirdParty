@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Upsert">Create New</a>
+    <a asp-action="Upsert"><i class="fa-solid fa-plus"></i>&nbsp;Create New</a>
 </p>
 <table class="table bg-white shadow ">
     <thead>
@@ -68,9 +68,9 @@
                     @Html.DisplayFor(modelItem => item.QtyBought)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Upsert", new { id=item.WeaponId }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.WeaponId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.WeaponId })
+                    <a asp-action="Upsert" asp-route-id="@item.WeaponId"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.WeaponId"><i class="fa-solid fa-circle-info"></i>&nbsp;Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.WeaponId"><i class="fa-solid fa-trash"></i>&nbsp;Delete</a>
                 </td>
             </tr>
         }
