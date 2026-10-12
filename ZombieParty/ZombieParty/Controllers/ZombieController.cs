@@ -16,30 +16,31 @@ namespace ZombieParty.Controllers
             _baseDonnees = baseDonnees;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<Zombie> zombiesList = _baseDonnees.Zombies.OrderBy(z => z.Name).Include(z => z.ZombieType).ToList();
+            List<Zombie> zombiesList = await _baseDonnees.Zombies.OrderBy(z => z.Name).Include(z => z.ZombieType).ToListAsync();
 
             return View(zombiesList);
         }
 
-        public IActionResult StrongestZombies()
+        public async Task<IActionResult> StrongestZombies()
         {
-            List<Zombie> zombiesList = _baseDonnees.Zombies.Where(z => z.Point >= 8).OrderBy(z => z.Name).Include(z => z.ZombieType).ToList();
+            List<Zombie> zombiesList = await _baseDonnees.Zombies.Where(z => z.Point >= 8).OrderBy(z => z.Name).Include(z => z.ZombieType).ToListAsync();
 
             return View(zombiesList);
         }
 
-        public IActionResult ZombiesByType()
+        public async Task<IActionResult> ZombiesByType()
         {
-            List<ZombieType> zombieTypes = _baseDonnees.ZombieTypes.OrderBy(z => z.TypeName).Include(z => z.Zombies).ToList();
+            List<ZombieType> zombieTypes = await _baseDonnees.ZombieTypes.OrderBy(z => z.TypeName).Include(z => z.Zombies).ToListAsync();
 
             return View(zombieTypes);
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            Zombie? zombie = _baseDonnees.Zombies.Include(z => z.ZombieType).FirstOrDefault(z => z.Id == id);
+            Zombie? zombie = await _baseDonnees.Zombies.Include(z => z.ZombieType).FirstOrDefaultAsync(z => z.Id == id);
+
             if (zombie == null)
             {
                 return NotFound();
